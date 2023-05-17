@@ -54,8 +54,8 @@ class NewStudentContainer extends Component {
     else if (!/\S/.test(this.state.lastname)) {
       alert("You must enter a last name!");
     }
-    else if (!/\S/.test(this.state.email)) {
-      alert("You must enter an email!");
+    else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
+      alert("You must enter a valid email!");
     }
     else if (this.state.gpa > 4 || this.state.gpa < 0) {
       alert("Enter a valid GPA or leave it blank! (Between 0.0 and 4.0)");
