@@ -92,6 +92,15 @@ class EditCampusContainer extends Component {
       await this.props.editCampus(campus);
       // Update state, and trigger redirect to show the new campus
       this.setState({
+        name: '',
+        address: '', 
+        description: '', 
+        imgUrl: '',
+        id: '', 
+        nameInput: '',
+        addressInput: '',
+        descriptionInput: '',
+        imgUrlInput: '',
         redirect: true, 
         redirectId: campus.id
       });
@@ -103,9 +112,9 @@ class EditCampusContainer extends Component {
       this.setState({redirect: false, redirectId: null});
   }
 
-  // Render new campus input form
+  // Render edit campus input form
   render() {
-    // Redirect to new campus's page after submit
+    // Redirect to edit campus's page after submit
     if(this.state.redirect) {
       return (<Redirect to={`/campus/${this.state.redirectId}`}/>)
     }
