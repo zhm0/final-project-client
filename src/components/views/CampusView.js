@@ -50,14 +50,15 @@ const CampusView = (props) => {
   return (
     <div>
       <h1>{campus.name}</h1>
-      <img src={campus.imageUrl} alt="Image not found" style={{width: '480px'}}></img>
+      <img src={campus.imgUrl} alt="Image not found" style={{width: '480px'}}></img>
       <p>{campus.address}</p>
       <p>{campus.description}</p>
-      <Link to={`/campus/${campus.id}/edit`}>
-        <button>Edit Campus</button>
+      <p>ID: {campus.id}</p>
+      <Link style={{position: "relative", right: "10%"}} to={`/campus/${campus.id}/edit`}>
+        <button style={{position: "relative", padding: "3px"}}>Edit Campus</button>
       </Link>
-      <Link to={'/campuses'}>
-        <button onClick={() => deleteCampus(campus.id)}>Delete Campus</button> 
+      <Link style={{position: "relative", left: "10%"}} to={'/campuses'}>
+        <button style={{position: "relative", padding: "3px"}} onClick={() => deleteCampus(campus.id)}>Delete Campus</button> 
       </Link>
       <h2>Students</h2>
       <ListStudents students={campus.students} deleteStudent={props.deleteStudent} handleClick={props.handleClick}/>

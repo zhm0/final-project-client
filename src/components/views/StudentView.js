@@ -39,16 +39,16 @@ const StudentView = (props) => {
   return (
     <div>
       <br/>
-      <img src={student.imageUrl} alt="Broken link to profile picture of student" style={{width: '240px'}}></img>
+      <img src={student.imgUrl} alt="Broken link to profile picture of student" style={{width: '240px'}}></img>
       <h1>{student.firstname + " " + student.lastname}</h1>
       <CampusCheck student={student}/>
-      <p>{student.email}</p>
       <GpaDisplay gpa={student.gpa}/>
-      <Link to={`/student/${student.id}/edit`}>
-        <button>Edit Student</button>
+      <p>{student.email}</p>
+      <Link style={{position: "relative", right: "10%"}} to={`/student/${student.id}/edit`}>
+        <button style={{position: "relative", padding: "2px"}}>Edit Student</button>
       </Link>
-      <Link to={'/students'}>
-        <button onClick={() => props.deleteStudent(student.id)}>Delete Student</button>
+      <Link style={{position: "relative", left: "10%"}} to={'/students'}>
+        <button style={{position: "relative", padding: "2px"}}onClick={() => props.deleteStudent(student.id)}>Delete Student</button>
       </Link>
     </div>
   );

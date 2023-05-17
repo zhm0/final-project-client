@@ -68,9 +68,12 @@ class NewStudentContainer extends Component {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
         email: this.state.email,
-        imgUrl: this.state.imgUrl,
         gpa: this.state.gpa,
       };
+
+      if (this.state.imgUrl) {
+        student.imgUrl = this.state.imgUrl;
+      }
 
       if (student.gpa === "") {
         student.gpa = null;
