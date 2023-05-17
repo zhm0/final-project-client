@@ -66,18 +66,36 @@ class EditCampusContainer extends Component {
       imgUrl: '',
       id: this.state.id
     }
-    !/\S/.test(this.state.nameInput) ? campus.name = this.state.name : campus.name = this.state.nameInput;
-    !/\S/.test(this.state.addressInput) ? campus.address = this.state.address : campus.address = this.state.addressInput;
-    !/\S/.test(this.state.descriptionInput) ? campus.description = this.state.description : campus.description = this.state.descriptionInput;
-    !/\S/.test(this.state.imgUrlInput) ? campus.imgUrl = this.state.imgUrl : campus.imgUrl = this.state.imgUrlInput;
     
-    // Edit campus in back-end database
-    await this.props.editCampus(campus);
-    // Update state, and trigger redirect to show the new campus
-    this.setState({
-      redirect: true, 
-      redirectId: campus.id
-    });
+    if (this.state.nameInput === '' && this.state.addressInput === '' && this.state.descriptionInput === '' && this.state.imgUrlInput === '') {
+      alert("You must edit something otherwise go back!")
+    }
+    else if (!/\S/.test(this.state.nameInput) && this.state.nameInput !== '') {
+      alert("You cannot just use spaces for name!")
+    }
+    else if (!/\S/.test(this.state.addressInput) && this.state.addressInput !== '') {
+      alert("You cannot just use spaces for address!")
+    }
+    else if (!/\S/.test(this.state.descriptionInput) && this.state.descriptionInput !== '') {
+      alert("You cannot just use spaces for description!")
+    }
+    else if (!/\S/.test(this.state.imgUrlInput) && this.state.imgUrlInput !== '') {
+      alert("You cannot just use spaces for image URL!")
+    }
+    else {
+      this.state.nameInput === '' ? campus.name = this.state.name : campus.name = this.state.nameInput;
+      this.state.addressInput === '' ? campus.address = this.state.address : campus.address = this.state.addressInput;
+      this.state.descriptionInput === '' ? campus.description = this.state.description : campus.description = this.state.descriptionInput;
+      this.state.imgUrlInput === '' ? campus.imgUrl = this.state.imgUrl : campus.imgUrl = this.state.imgUrlInput;
+    
+      // Edit campus in back-end database
+      await this.props.editCampus(campus);
+      // Update state, and trigger redirect to show the new campus
+      this.setState({
+        redirect: true, 
+        redirectId: campus.id
+      });
+    }
   }
 
   // Unmount when the component is being removed from the DOM:
