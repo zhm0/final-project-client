@@ -18,7 +18,7 @@ const CampusCheck = (props) => {
   }
   
   return (
-    <h3>Currently not enrolled in college</h3>
+    <h3>Currently not enrolled in college (Edit to enroll)</h3>
   )
 }
 
@@ -32,11 +32,11 @@ const StudentView = (props) => {
       <img src={student.imageUrl} alt="Broken link to profile picture of student" style={{width: '240px'}}></img>
       <h1>{student.firstname + " " + student.lastname}</h1>
       <CampusCheck student={student}/>
+      <p>{student.email}</p>
+      <p>{student.gpa}</p>
       <Link to={`/student/${student.id}/edit`}>
         <button>Edit Student</button>
       </Link>
-      <p>{student.email}</p>
-      <p>{student.gpa}</p>
       <Link to={'/students'}>
         <button onClick={() => props.deleteStudent(student.id)}>Delete Student</button>
       </Link>

@@ -29,16 +29,13 @@ const ListStudents = (props) => {
         <Link to={`/student/${student.id}`}>
           <h3>{name}</h3>
         </Link> 
-        <button onClick={() => handleClick(student.id)}>Remove From Campus(WRONG DELETE CURRENTLY)</button>  
+        <button onClick={() => handleClick(student.id)}>Remove From Campus</button>  
         <hr/>          
       </div>
       );
       })}
     <Link to={`/newstudent`}>
       <button>Add New Student</button>
-    </Link>
-    <Link to={`/newstudent`}>
-      <button>Add Existing Student</button>
     </Link>
   </Fragment>
   );
