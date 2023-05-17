@@ -55,7 +55,7 @@ const CampusView = (props) => {
       <h1>{campus.name}</h1>
       <p>{campus.address}</p>
       <p>{campus.description}</p>
-      <Link to={`/newstudent`}>
+      <Link to={`/campus/${campus.id}/editcampus`}>
         <button>Edit Campus</button>
       </Link>
       <Link to={'/campuses'}>
