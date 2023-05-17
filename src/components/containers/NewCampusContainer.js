@@ -21,6 +21,7 @@ class NewCampusContainer extends Component {
       name: "", 
       address: "", 
       description: "", 
+      imgUrl: "",
       id: null, 
       redirect: false, 
       redirectId: null
@@ -38,24 +39,34 @@ class NewCampusContainer extends Component {
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
 
-    let campus = {
+    if (!/\S/.test(this.state.name)) {
+      alert("You must enter a name!");
+    }
+    else if (!/\S/.test(this.state.address)) {
+      alert("You must enter an address!");
+    }
+    else {
+      let campus = {
         name: this.state.name,
         address: this.state.address,
         description: this.state.description,
-    };
+        imgUrl: this.state.imgUrl
+      };
     
-    // Add new campus in back-end database
-    let newCampus = await this.props.addCampus(campus);
+      // Add new campus in back-end database
+      let newCampus = await this.props.addCampus(campus);
 
-    // Update state, and trigger redirect to show the new campus
-    this.setState({
-      name: newCampus.name, 
-      address: newCampus.address, 
-      description: newCampus.description, 
-      id: newCampus.id, 
-      redirect: true, 
-      redirectId: newCampus.id
-    });
+      // Update state, and trigger redirect to show the new campus
+      this.setState({
+        name: newCampus.name, 
+        address: newCampus.address, 
+        description: newCampus.description, 
+        imgUrl: newCampus.imgUrl,
+        id: newCampus.id,
+        redirect: true, 
+        redirectId: newCampus.id
+      });
+    }
   }
 
   // Unmount when the component is being removed from the DOM:
