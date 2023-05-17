@@ -11,7 +11,10 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import NewStudentView from '../views/NewStudentView';
-import { addStudentThunk } from '../../store/thunks';
+import { 
+  addStudentThunk,
+  fetchAllCampusesThunk
+} from '../../store/thunks';
 
 class NewStudentContainer extends Component {
   // Initialize state
@@ -19,11 +22,19 @@ class NewStudentContainer extends Component {
     super(props);
     this.state = {
       firstname: "", 
-      lastname: "", 
-      campusId: null, 
+      lastname: "",
+      email: "",
+      imgUrl: "",
+      gpa: "",
+      campusId: "", 
       redirect: false, 
       redirectId: null
     };
+  }
+
+  componentDidMount() {
+    console.log(this.props);
+    this.props.fetchAllCampuses();
   }
 
   // Capture input data when it is entered
@@ -37,23 +48,53 @@ class NewStudentContainer extends Component {
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
 
-    let student = {
+    if (!/\S/.test(this.state.firstname)) {
+      alert("You must enter a first name!");
+    }
+    else if (!/\S/.test(this.state.lastname)) {
+      alert("You must enter a last name!");
+    }
+    else if (!/\S/.test(this.state.email)) {
+      alert("You must enter an email!");
+    }
+    else if (this.state.gpa > 4 || this.state.gpa < 0) {
+      alert("Enter a valid GPA or leave it blank! (Between 0.0 and 4.0)");
+    }
+    else if (this.state.campusId != "" && this.props.allCampuses.find(campus => campus.id == this.state.campusId) === undefined) {
+      alert("Enter a valid campus ID or leave it blank! (You can check all campuses for valid IDs)");
+    }
+    else {
+      let student = {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
-        campusId: this.state.campusId
-    };
-    
-    // Add new student in back-end database
-    let newStudent = await this.props.addStudent(student);
+        email: this.state.email,
+        imgUrl: this.state.imgUrl,
+        gpa: this.state.gpa,
+      };
 
-    // Update state, and trigger redirect to show the new student
-    this.setState({
-      firstname: "", 
-      lastname: "", 
-      campusId: null, 
-      redirect: true, 
-      redirectId: newStudent.id
-    });
+      if (student.gpa === "") {
+        student.gpa = null;
+      }
+
+      if (this.state.campusId) {
+        student.campusId = this.state.campusId;
+      }
+
+      // Add new student in back-end database
+      let newStudent = await this.props.addStudent(student);
+
+      // Update state, and trigger redirect to show the new student
+      this.setState({
+        firstname: "", 
+        lastname: "", 
+        email: "",
+        imgUrl: "",
+        gpa: "",
+        campusId: null, 
+        redirect: true, 
+        redirectId: newStudent.id
+      });
+    }
   }
 
   // Unmount when the component is being removed from the DOM:
@@ -74,12 +115,18 @@ class NewStudentContainer extends Component {
         <Header />
         <NewStudentView 
           handleChange = {this.handleChange} 
-          handleSubmit={this.handleSubmit}      
+          handleSubmit={this.handleSubmit}
         />
       </div>          
     );
   }
 }
+
+const mapState = (state) => {
+  return {
+    allCampuses: state.allCampuses,  // Get the State object from Reducer "allCampuses"
+  };
+};
 
 // The following input argument is passed to the "connect" function used by "NewStudentContainer" component to connect to Redux Store.
 // The "mapDispatch" argument is used to dispatch Action (Redux Thunk) to Redux Store.
@@ -87,10 +134,11 @@ class NewStudentContainer extends Component {
 const mapDispatch = (dispatch) => {
     return({
         addStudent: (student) => dispatch(addStudentThunk(student)),
+        fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
     })
 }
 
 // Export store-connected container by default
 // NewStudentContainer uses "connect" function to connect to Redux Store and to read values from the Store 
 // (and re-read the values when the Store State updates).
-export default connect(null, mapDispatch)(NewStudentContainer);
+export default connect(mapState, mapDispatch)(NewStudentContainer);
