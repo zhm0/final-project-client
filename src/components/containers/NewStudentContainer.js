@@ -60,7 +60,7 @@ class NewStudentContainer extends Component {
     else if (this.state.gpa > 4 || this.state.gpa < 0) {
       alert("Enter a valid GPA or leave it blank! (Between 0.0 and 4.0)");
     }
-    else if (this.state.campusId != "" && this.props.allCampuses.find(campus => campus.id == this.state.campusId) === undefined) {
+    else if (this.state.campusId !== "" && this.props.allCampuses.find(campus => campus.id == this.state.campusId) === undefined) {
       alert("Enter a valid campus ID or leave it blank! (You can check all campuses for valid IDs)");
     }
     else {

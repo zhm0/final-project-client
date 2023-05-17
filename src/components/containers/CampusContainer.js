@@ -10,7 +10,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { 
   fetchCampusThunk,
-  deleteStudentThunk,
+  editStudentThunk,
   deleteCampusThunk
 } from "../../store/thunks";
 
@@ -23,6 +23,15 @@ class CampusContainer extends Component {
     this.props.fetchCampus(this.props.match.params.id);
   }
 
+  handleClick = async (id) => {
+    let removeCampus = {
+      campusId: null,
+      id: id
+    }
+    await this.props.editStudent(removeCampus);
+    this.props.fetchCampus(this.props.match.params.id);
+  }
+
   // Render a Campus view by passing campus data as props to the corresponding View component
   render() {
     return (
@@ -30,7 +39,8 @@ class CampusContainer extends Component {
         <Header />
         <CampusView 
           campus={this.props.campus} 
-          deleteStudent={this.props.deleteStudent} 
+          handleClick={this.handleClick}
+          editStudent={this.props.editStudent} 
           deleteCampus={this.props.deleteCampus} 
         />
       </div>
@@ -51,7 +61,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchCampus: (id) => dispatch(fetchCampusThunk(id)),
-    deleteStudent: (studentId) => dispatch(deleteStudentThunk(studentId)),
+    editStudent: (student) => dispatch(editStudentThunk(student)),
     deleteCampus: (id) => dispatch(deleteCampusThunk(id))
   };
 };
