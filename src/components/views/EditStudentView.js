@@ -67,7 +67,7 @@ const EditStudentView = (props) => {
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold', position: 'relative', left: '2px'}}>Image URL: </label>
-            <input type="text" name="imageUrlInput" onChange={(e) => handleChange(e)} placeholder={currentStudent.imgUrl} />
+            <input type="text" name="imgUrlInput" onChange={(e) => handleChange(e)} placeholder={currentStudent.imgUrl} />
             <br/>
             <br/>
 

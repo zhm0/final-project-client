@@ -22,6 +22,16 @@ const CampusCheck = (props) => {
   )
 }
 
+const GpaDisplay = (props) => {
+  const { gpa } = props;
+  if (gpa) {
+    return (
+      <p>GPA: {gpa}</p>
+    );
+  }
+  return (null);
+}
+
 const StudentView = (props) => {
   const { student } = props;
 
@@ -33,7 +43,7 @@ const StudentView = (props) => {
       <h1>{student.firstname + " " + student.lastname}</h1>
       <CampusCheck student={student}/>
       <p>{student.email}</p>
-      <p>{student.gpa}</p>
+      <GpaDisplay gpa={student.gpa}/>
       <Link to={`/student/${student.id}/edit`}>
         <button>Edit Student</button>
       </Link>
