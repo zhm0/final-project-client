@@ -72,12 +72,12 @@ const NewStudentView = (props) => {
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold', position: 'relative', left: '25px'}}>GPA: </label>
-            <input style={{position: 'relative', left: '25px'}}type="text" name="gpa" onChange={(e) => handleChange(e)} />
+            <input style={{position: 'relative', left: '25px'}}type="number" name="gpa" step="0.01" onChange={(e) => handleChange(e)} />
             <br/>
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold', position: 'relative', left: '2px'}}>Campus ID: </label>
-            <input type="text" name="campusId" onChange={(e) => handleChange(e)} />
+            <input type="number" name="campusId" onChange={(e) => handleChange(e)} />
             <br/>
             <br/>
 
