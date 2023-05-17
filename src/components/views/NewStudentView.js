@@ -56,12 +56,27 @@ const NewStudentView = (props) => {
             <br/>
             <br/>
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>Last Name: </label>
-            <input type="text" name="lastname" onChange={(e) => handleChange(e)} />
+            <label style={{color:'#11153e', fontWeight: 'bold', position: 'relative', left: '2px'}}>Last Name: </label>
+            <input style={{position: 'relative', left: '2px'}} type="text" name="lastname" onChange={(e) => handleChange(e)} />
             <br/>
             <br/>
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>Campus Id: </label>
+            <label style={{color:'#11153e', fontWeight: 'bold', position: 'relative', left: '21px'}}>Email: </label>
+            <input style={{position: 'relative', left: '21px'}} type="text" name="email" onChange={(e) => handleChange(e)} />
+            <br/>
+            <br/>
+
+            <label style={{color:'#11153e', fontWeight: 'bold', position: 'relative', left: '2px'}}>Image URL: </label>
+            <input type="text" name="imageUrl" onChange={(e) => handleChange(e)} />
+            <br/>
+            <br/>
+
+            <label style={{color:'#11153e', fontWeight: 'bold', position: 'relative', left: '25px'}}>GPA: </label>
+            <input style={{position: 'relative', left: '25px'}}type="text" name="gpa" onChange={(e) => handleChange(e)} />
+            <br/>
+            <br/>
+
+            <label style={{color:'#11153e', fontWeight: 'bold', position: 'relative', left: '2px'}}>Campus ID: </label>
             <input type="text" name="campusId" onChange={(e) => handleChange(e)} />
             <br/>
             <br/>
