@@ -66,6 +66,11 @@ const NewCampusView = (props) => {
             <br/>
             <br/>
 
+            <label style={{color:'#11153e', fontWeight: 'bold', position: 'relative', left: '14px'}}>Image URL: </label>
+            <input style={{position: 'relative', left: '14px'}} type="text" name="imgUrl" onChange={(e) => handleChange(e)} />
+            <br/>
+            <br/>
+
             <Button variant="contained" color="primary" type="submit">
               Submit
             </Button>
