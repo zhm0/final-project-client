@@ -71,7 +71,7 @@ class NewStudentContainer extends Component {
         gpa: this.state.gpa,
       };
 
-      if (this.state.imgUrl) {
+      if (/\S/.test(this.state.imgUrl)) {
         student.imgUrl = this.state.imgUrl;
       }
 

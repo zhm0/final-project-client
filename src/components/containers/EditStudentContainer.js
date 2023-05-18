@@ -81,7 +81,7 @@ class EditStudentContainer extends Component {
     else if (this.state.emailInput !== '' && !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailInput)) {
         alert('That is not a valid email!');
     }
-    else if (this.state.gpaInput !== '' && (this.state.gpa > 4 || this.state.gpa < 0)) {
+    else if (this.state.gpaInput !== '' && (this.state.gpaInput > 4 || this.state.gpaInput < 0)) {
         alert('Enter a valid GPA or leave it blank! (Between 0.0 and 4.0)');
     }
     else if (this.state.campusIdInput !== '' && this.props.allCampuses.find(campus => campus.id == this.state.campusIdInput) === undefined) {
